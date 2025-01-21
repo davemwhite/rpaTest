@@ -1,0 +1,73 @@
+name: Run Firm UI Path Tests
+on:
+  # pull_request:
+  #   branches: [ main ]
+  push:
+    branches: [ test/* ]
+    
+jobs:
+ # remove-old-artifacts:
+ #    runs-on: windows-latest
+ #    timeout-minutes: 10
+ #    steps:
+ #    - name: Remove old artifacts
+ #      uses: c-hive/gha-remove-artifacts@v1
+ #      with:
+ #        age: '1 month'
+ Build:
+    runs-on: windows-latest
+    env:
+      # UIPATH_TENANT_NAME: ${{ secrets.UIPATH_TENANT_NAME }}
+      # UIPATH_ACCOUNT_NAME: ${{ secrets.UIPATH_ACCOUNT_NAME }}
+      # UIPATH_APPLICATION_ID: ${{ secrets.UIPATH_APPLICATION_ID }}
+      # UIPATH_APPLICATION_SECRET: ${{ secrets.UIPATH_APPLICATION_SECRET }}
+      # UIPATH_FOLDER: ${{ secrets.UIPATH_FOLDER }}
+      UIPATH_TENANT_NAME: DPL_Default
+      UIPATH_ACCOUNT_NAME: dplfp
+      UIPATH_USER_KEY: "-1yCS0RzRD_BjXQcVTq8nDjVRRycxRxN3Po4_u_fyZGe-"
+      UIPATH_FOLDER_NAME: Test Automation
+      UIPATH_PROJECT_PATH: ${{ github.workspace }}/test/cormac/project.json
+    steps:            
+      # Checkout code from this repo
+      - name: Checkout Code
+        uses: actions/checkout@v3      
+      # Facilitate the UiPath CLI in the github artifacts
+      - name: Get UiPath CLI
+        run: |
+                 New-Item -Path "C:\\" -ItemType "directory" -Name "uipathcli";
+                 Invoke-WebRequest "https://github.com/UiPath-Services/UiPath-DevOps-Scripts/raw/main/scripts/UiPathRunTest.ps1" -OutFile "C:\\uipathcli\\UiPathRunTest.ps1";
+      # Executes the test 
+      - name: Execute Test
+        run: |
+          C:\uipathcli\UiPathRunTest.ps1 -orchestrator_url "https://cloud.uipath.com/" -orchestrator_tenant $env:UIPATH_TENANT_NAME -UserKey $env:UIPATH_USER_KEY -account_name $env:UIPATH_ACCOUNT_NAME -folder_organization_unit $env:UIPATH_FOLDER_NAME -project_path $env:UIPATH_PROJECT_PATH -out junit -result_path ./result.json
+        
+      # C:\uipathcli\UiPathRunTest.ps1 test run -orchestrator_url "https://cloud.uipath.com" -orchestrator_tenant $env:UIPATH_TENANT_NAME -accountForApp $env:UIPATH_ACCOUNT_NAME -applicationId $env:UIPATH_APPLICATION_ID -applicationSecret $env:UIPATH_APPLICATION_SECRET -folder_organization_unit $env:UIPATH_FOLDER -project_path $env:TEST_PROJECT_PATH -input_path $env:PARAMETER_FILE --applicationScope "OR.Monitoring OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules OR.Settings OR.Robots OR.Machines OR.Execution OR.Assets OR.Users OR.Jobs" -result_path ./result.json
+      # Use uipcli to package and deploy (for each project.json found)                           
+      # - name: Pack and Deploy
+      #   run: |
+      #           foreach($package in Get-ChildItem -Path ${{ github.workspace }} -Recurse -Filter project.json -File)
+      #                  {    
+      #                     # Get some data from the package.json for package naming
+      #                     $json = Get-Content "$package" | Out-String | ConvertFrom-Json
+      #                     $foo = $json.projectVersion
+      #                     $Name=$json.name
+      #                     echo "::set-output name=PATH::$package"
+      #                     echo $foo
+      #                     $v= [version] "$foo"
+      #                     $newversion= "{0}.{1}.{2}.{3}" -f $v.Major, $v.Minor, ($v.Build),"${{github.run_number}}"
+      #                     $VERSION=[string]$newversion
+      #                     echo $VERSION
+      #                     echo $Name
+      #                     echo ${{ github.workspace }}\$Name.$VERSION.nupkg
+      #                     # Build and Deploy the Package
+      #                     & "C:\\uipathcli\\lib\\net461\\uipcli.exe" package pack "$package" -o "${{ github.workspace }}" -v $VERSION -l en-US
+      #                     & "C:\\uipathcli\\lib\\net461\\uipcli.exe" package deploy "${{ github.workspace }}\$($Name).$VERSION.nupkg" "https://cloud.uipath.com" "${{secrets.UAT_TENANT_NAME}}" -A ${{secrets.ACCOUNT_NAME}} -I ${{secrets.OAUTH_CLIENT_ID}} -S "${{secrets.OAUTH_CLIENT_SECRET}}" -o "Shared" --applicationScope "${{secrets.OAUTH_CLIENT_SCOPES}}"
+      #                  }    
+      # # Persist build artifacts
+      # - name: Upload a Build Artifact
+      #   uses: actions/upload-artifact@v2.2.0
+      #   with:	 
+      #        name: ProjectFiles
+      #        path: ${{ github.workspace }}/**
+      #        if-no-files-found: error
+      #        retention-days: 2
