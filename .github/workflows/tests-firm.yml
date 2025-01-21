@@ -3,7 +3,7 @@ on:
   # pull_request:
   #   branches: [ main ]
   push:
-    branches: [ test/* ]
+    branches: [ main ]
     
 jobs:
  # remove-old-artifacts:
