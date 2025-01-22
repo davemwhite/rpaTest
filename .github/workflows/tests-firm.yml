@@ -39,8 +39,9 @@ jobs:
       # Executes the test 
       - name: Execute Test
         run: |
-          C:\uipathcli\UiPathRunTest.ps1 -orchestrator_url "https://cloud.uipath.com/" -orchestrator_tenant $env:UIPATH_TENANT_NAME -UserKey $env:UIPATH_USER_KEY -account_name $env:UIPATH_ACCOUNT_NAME -folder_organization_unit $env:UIPATH_FOLDER_NAME -project_path $env:UIPATH_PROJECT_PATH -out junit -result_path ./result.json
-        
+      # C:\uipathcli\UiPathRunTest.ps1 -orchestrator_url "https://cloud.uipath.com/" -orchestrator_tenant $env:UIPATH_TENANT_NAME -UserKey $env:UIPATH_USER_KEY -account_name $env:UIPATH_ACCOUNT_NAME -folder_organization_unit $env:UIPATH_FOLDER_NAME -project_path $env:UIPATH_PROJECT_PATH -out junit -result_path ./result.json
+                 C:\uipathcli\UiPathRunTest.ps1 -orchestrator_url "https://cloud.uipath.com/" -orchestrator_tenant "DPL_Default" -UserKey "-1yCS0RzRD_BjXQcVTq8nDjVRRycxRxN3Po4_u_fyZGe-" -account_name "dplfp" -testset "dwTestSet1"
+
       # C:\uipathcli\UiPathRunTest.ps1 test run -orchestrator_url "https://cloud.uipath.com" -orchestrator_tenant $env:UIPATH_TENANT_NAME -accountForApp $env:UIPATH_ACCOUNT_NAME -applicationId $env:UIPATH_APPLICATION_ID -applicationSecret $env:UIPATH_APPLICATION_SECRET -folder_organization_unit $env:UIPATH_FOLDER -project_path $env:TEST_PROJECT_PATH -input_path $env:PARAMETER_FILE --applicationScope "OR.Monitoring OR.Folders OR.BackgroundTasks OR.TestSets OR.TestSetExecutions OR.TestSetSchedules OR.Settings OR.Robots OR.Machines OR.Execution OR.Assets OR.Users OR.Jobs" -result_path ./result.json
       # Use uipcli to package and deploy (for each project.json found)                           
       # - name: Pack and Deploy
