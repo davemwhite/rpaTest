@@ -39,7 +39,7 @@ jobs:
       # Executes the test 
       - name: Execute Test
         run: |
-                 C:\uipathcli\UiPathRunTest.ps1 -orchestrator_url "https://cloud.uipath.com/" -orchestrator_tenant "DPL_Default" -UserKey "gSLHiFRFSFnUfjoanr8XVYeq35Uy_UjLSsYkFpsQpMuE1" -account_name "dplfp" -folder_organization_unit "DPL/TestAutomation" -testset "dwTestSet1"
+                 C:\uipathcli\UiPathRunTest.ps1 -orchestrator_url "https://cloud.uipath.com/" -orchestrator_tenant "DPL_Default" -UserKey "gSLHiFRFSFnUfjoanr8XVYeq35Uy_UjLSsYkFpsQpMuE1" -account_name "dplfp" -folder_organization_unit "DPL\TestAutomation" -testset "dwTestSet1"
 
       # C:\uipathcli\UiPathRunTest.ps1 -orchestrator_url "https://cloud.uipath.com/" -orchestrator_tenant $env:UIPATH_TENANT_NAME -UserKey $env:UIPATH_USER_KEY -account_name $env:UIPATH_ACCOUNT_NAME -folder_organization_unit $env:UIPATH_FOLDER_NAME -project_path $env:UIPATH_PROJECT_PATH -out junit -result_path ./result.json
 
