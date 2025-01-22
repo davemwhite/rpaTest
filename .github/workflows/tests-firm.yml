@@ -35,7 +35,8 @@ jobs:
       - name: Get UiPath CLI
         run: |
                  New-Item -Path "C:\\" -ItemType "directory" -Name "uipathcli";
-                 Invoke-WebRequest "https://github.com/UiPath-Services/UiPath-DevOps-Scripts/raw/main/scripts/UiPathRunTest.ps1" -OutFile "C:\\uipathcli\\UiPathRunTest.ps1";
+                 Invoke-WebRequest "https://raw.githubusercontent.com/davemwhite/rpaTest/refs/heads/main/scripts/UiPathRunTestV2.ps1" -OutFile "C:\\uipathcli\\UiPathRunTest.ps1";
+      #Invoke-WebRequest "https://github.com/UiPath-Services/UiPath-DevOps-Scripts/raw/main/scripts/UiPathRunTest.ps1" -OutFile "C:\\uipathcli\\UiPathRunTest.ps1";
       # Executes the test 
       - name: Execute Test
         run: |
