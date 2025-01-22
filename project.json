@@ -49,6 +49,7 @@
         "fileName": "TestCase.xaml"
       }
     ],
+    "modernBehavior": false,
     "saveToCloud": false
   },
   "expressionLanguage": "VisualBasic",
