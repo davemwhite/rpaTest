@@ -22,7 +22,7 @@ jobs:
       # UIPATH_APPLICATION_ID: ${{ secrets.UIPATH_APPLICATION_ID }}
       # UIPATH_APPLICATION_SECRET: ${{ secrets.UIPATH_APPLICATION_SECRET }}
       # UIPATH_FOLDER: ${{ secrets.UIPATH_FOLDER }}
-      UIPATH_TENANT_NAME: DPL_Default
+      UIPATH_TENANT_NAME: DPL_Default 
       UIPATH_ACCOUNT_NAME: dplfp 
       UIPATH_USER_KEY: "-1yCS0RzRD_BjXQcVTq8nDjVRRycxRxN3Po4_u_fyZGe-"
       UIPATH_FOLDER_NAME: Test Automation
