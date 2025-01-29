@@ -40,7 +40,7 @@ jobs:
       # Executes the test 
       - name: Execute Test
         run: |
-                          C:\uipathcli\UiPathRunTest.ps1 test run -orchestrator_url "https://cloud.uipath.com" -orchestrator_tenant $env:UIPATH_TENANT_NAME -accountForApp $env:UIPATH_ACCOUNT_NAME -applicationId $env:UIPATH_APPLICATION_ID -applicationSecret $env:UIPATH_APPLICATION_SECRET -folder_organization_unit $env:UIPATH_FOLDER -testset "DPLFP-Test1" -result_path ./result.json
+                          C:\uipathcli\UiPathRunTest.ps1 test run -orchestrator_url "https://cloud.uipath.com" -orchestrator_tenant $env:UIPATH_TENANT_NAME -accountForApp $env:UIPATH_ACCOUNT_NAME -UserKey $env:UIPATH_USER_KEY -folder_organization_unit $env:UIPATH_FOLDER -testset "DPLFP-Test1" -result_path ./result.json
 
       # C:\uipathcli\UiPathRunTest.ps1 -orchestrator_url "https://cloud.uipath.com/" -orchestrator_tenant "DPL_Default" -UserKey "gSLHiFRFSFnUfjoanr8XVYeq35Uy_UjLSsYkFpsQpMuE1" -account_name "dplfp" -folder_organization_unit TestAutomation -testset "DPLFP-Test1" 
 
